@@ -53,6 +53,8 @@ client.on("guildMemberAdd", member => {
     let gMesaj = louritydb.get(`hgbbGirisMesaj_${member.guild.id}`);
     const kanal = louritydb.get(`hgbb_${member.guild.id}`)
     if (!kanal) return;
+    let kontrol = client.channels.cache.get(kanal)
+    if (!kontrol) return;
 
     // const msge = gMesaj
     //     .replace("-etiketsiz-", member.user.tag)
@@ -66,7 +68,7 @@ client.on("guildMemberAdd", member => {
         .setFooter({ text: "Lourity Tester" })
         .setColor("Green")
 
-    member.guild.channels.cache.get(kanal).send({ embeds: [embed] })
+    member.guild.channels.cache.get(kanal).send({ embeds: [embed] }).catch(l => { })
 });
 
 client.on("guildMemberRemove", member => {
@@ -74,6 +76,8 @@ client.on("guildMemberRemove", member => {
     let cMesaj = louritydb.get(`hgbbCikisMesaj_${member.guild.id}`);
     const kanal = louritydb.get(`hgbb_${member.guild.id}`)
     if (!kanal) return;
+    let kontrol = client.channels.cache.get(kanal)
+    if (!kontrol) return;
 
     // const msge = cMesaj
     //     .replace("-etiketsiz-", member.user.tag)
@@ -87,7 +91,7 @@ client.on("guildMemberRemove", member => {
         .setFooter({ text: "Lourity Tester" })
         .setColor("Red")
 
-    member.guild.channels.cache.get(kanal).send({ embeds: [embed] })
+    member.guild.channels.cache.get(kanal).send({ embeds: [embed] }).catch(l => { })
 });
 
 // Hoşgeldin Sistemi - Button
@@ -110,7 +114,7 @@ client.on('interactionCreate', async interaction => {
         louritydb.delete(`hgbb_${interaction.guild.id}`)
         louritydb.delete(`hgbbCikisMesaj_${interaction.guild.id}`)
         louritydb.delete(`hgbbGirisMesaj_${interaction.guild.id}`)
-        interaction.reply({ embeds: [embed1], ephemeral: true })
+        interaction.reply({ embeds: [embed1], ephemeral: true }).catch(l => { })
     }
 })
 
@@ -140,7 +144,7 @@ client.on('interactionCreate', async interaction => {
         louritydb.delete(`hgbb_${interaction.guild.id}`)
         louritydb.delete(`hgbbCikisMesaj_${interaction.guild.id}`)
         louritydb.delete(`hgbbGirisMesaj_${interaction.guild.id}`)
-        interaction.reply({ embeds: [embed1], ephemeral: true })
+        interaction.reply({ embeds: [embed1], ephemeral: true }).catch(l => { })
     }
 })
 
@@ -170,6 +174,6 @@ client.on('interactionCreate', async interaction => {
     if (interaction.customId === "goster") {
         if (!msge) return interaction.reply({ embeds: [uyari], ephemeral: true })
         if (!msge2) return interaction.reply({ embeds: [uyari], ephemeral: true })
-        interaction.reply({ embeds: [mesaj], ephemeral: true })
+        interaction.reply({ embeds: [mesaj], ephemeral: true }).catch(l => { })
     }
 })
